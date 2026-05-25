@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>量化持股配置平衡系統</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Urbanist:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f1f3f5;       
+            --card-bg: #ffffff;        
+            --text-main: #212529;      
+            --text-muted: #5a626a;     
+            --accent-border: #ced4da;  
+            --input-bg: #f8f9fa;       
+            --accent-green: #2ecc71;   
+            --accent-red: #ff7675;     
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html, body { height: 100vh; overflow: hidden; }
+        body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Noto Sans TC', 'Urbanist', sans-serif; display: flex; justify-content: center; align-items: center; padding: 4px; }
+
+        .container {
+            width: 100%; max-width: 415px; background: var(--card-bg); border: 1px solid var(--accent-border);
+            border-radius: 12px; padding: 8px 14px; box-shadow: 0 6px 25px rgba(0, 0, 0, 0.04);
+            display: flex; flex-direction: column;
+        }
+
+        h1 { font-size: 18px; font-weight: 700; text-align: center; margin-bottom: 1px; color: var(--text-main); letter-spacing: 0.5px; }
+        .subtitle { font-size: 11px; color: var(--text-muted); text-align: center; margin-bottom: 6px; letter-spacing: 0.3px; }
+        .section-title { font-size: 12px; color: var(--text-main); font-weight: 700; margin-bottom: 4px; border-bottom: 2px solid var(--text-main); padding-bottom: 2px; letter-spacing: 0.5px; text-transform: uppercase; }
+        
+        .grid-3col { display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 6px; margin-bottom: 4px; }
+        .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 4px; }
+        
+        .form-group { margin-bottom: 1px; }
+        label { display: block; font-size: 11.5px; font-weight: 700; margin-bottom: 3px; color: var(--text-main); white-space: nowrap; letter-spacing: 0.2px; }
+        .input-wrapper { position: relative; display: flex; align-items: center; }
+        
+        input {
+            width: 100%; padding: 5px 8px; background: var(--input-bg); border: 1px solid var(--accent-border);
+            border-radius: 5px; color: var(--text-main); font-size: 13.5px; font-family: 'Urbanist', 'Noto Sans TC', sans-serif;
+            font-weight: 700; transition: all 0.1s ease;
+        }
+        input:focus { outline: none; border-color: #212529; background: #fff; }
+        .unit { position: absolute; right: 8px; color: var(--text-muted); font-size: 11px; pointer-events: none; font-weight: 700; }
+        .has-unit { padding-right: 22px; }
+
+        .quant-input-box { margin: 1px 0 5px 0; padding: 5px 10px; border: 1.5px solid var(--text-main); border-radius: 6px; background-color: #fffaf0; }
+        .quant-flex { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+        .quant-label { font-size: 13.5px !important; font-weight: 700 !important; color: var(--text-main) !important; letter-spacing: 0.3px; }
+        .quant-input-style { width: 70px; padding: 3px 6px; text-align: center; font-size: 14.5px !important; font-weight: 700 !important; border: 1.5px solid var(--text-main) !important; border-radius: 5px; color: var(--text-main) !important; background: #ffffff; }
+
+        .market-status-box { margin: 4px 0; padding: 6px 10px; border: 1px solid var(--accent-border); border-radius: 6px; background-color: var(--input-bg); }
+        .market-flex { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+        .market-info-text { font-size: 13px; line-height: 1.6; color: var(--text-main); flex: 1; font-weight: 700; }
+        .market-input-style { width: 58px; padding: 3px; text-align: center; font-size: 14px; font-weight: 700; border-radius: 5px; border: 1px solid var(--accent-border); background-color: var(--card-bg); }
+
+        .result-panel { margin-top: 4px; border-top: 1px solid var(--accent-border); padding-top: 5px; }
+        .dashboard-grid-3col { display: grid; grid-template-columns: 1fr 1.1fr 1fr; gap: 5px; margin-bottom: 4px; }
+        .dashboard-item { background: var(--input-bg); padding: 8px 2px; border-radius: 6px; border: 1px solid var(--accent-border); text-align: center; }
+        .dashboard-item span { display: block; font-size: 10px; color: var(--text-muted); margin-bottom: 2px; white-space: nowrap; font-weight: 700; letter-spacing: 0.2px; }
+        .dashboard-item strong { font-size: 15.5px; font-family: 'Urbanist', sans-serif; color: var(--text-main); font-weight: 700; }
+        .beta-box { background: #343a40; border: 1px solid #343a40; }
+        .beta-box span { color: #dee2e6; }
+        .beta-value-text { font-size: 16.5px !important; color: #ffffff !important; font-weight: 700; } 
+        .dynamic-range-box { text-align: center; font-size: 10px; color: var(--text-muted); margin-bottom: 4px; font-weight: 700; letter-spacing: 0.3px; }
+
+        .signal-card { padding: 8px 10px; border-radius: 7px; text-align: center; font-size: 12px; line-height: 1.5; background: #1f2421; border: 1px solid #1f2421; }
+        .signal-title { font-size: 14.5px; font-weight: 700; margin-bottom: 1px; letter-spacing: 0.3px; color: #ffffff; }
+        .action-amount { font-size: 26px; font-weight: 700; font-family: 'Urbanist', sans-serif; margin: 1px 0; display: block; letter-spacing: 0.5px; }
+        .signal-buy .action-amount { color: #2ecc71; } 
+        .signal-sell .action-amount { color: #ff7675; } 
+        .signal-hold .action-amount { color: #dee2e6; }
+
+        .highlight-shares-box { margin-top: 4px; padding: 6px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 5px; font-size: 13.5px; font-weight: 700; color: #ffffff; letter-spacing: 0.3px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>量化持股配置平衡系統</h1>
+    <div class="subtitle">目標：60% 正2 (Beta 1.2) | 閾值：±10% (1.08 ~ 1.32)</div>
+
+    <div class="section-title">1. 量化導航</div>
+    <div class="quant-input-box">
+        <div class="quant-flex">
+            <div class="quant-label">📊 模型持股配置：</div>
+            <div class="input-wrapper">
+                <input type="text" id="quantTarget" class="quant-input-style has-unit" value="67.9" oninput="runRebalance()">
+                <span class="unit" style="right:10px; color:var(--text-main); font-size: 11px; font-weight: 700;">%</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-title">2. 長期戰略防線</div>
+    <div class="grid-3col">
+        <div class="form-group">
+            <label for="targetRatio">配置比例中軸</label>
+            <div class="input-wrapper">
+                <input type="text" id="targetRatio" class="has-unit" value="60" oninput="validatePercent(this); runRebalance()">
+                <span class="unit">%</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="thresholdPercent">過濾觸發閾值</label>
+            <div class="input-wrapper">
+                <input type="text" id="thresholdPercent" class="has-unit" value="10" oninput="validatePercent(this); runRebalance()">
+                <span class="unit">±%</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="stockPrice">正2單股股價</label>
+            <div class="input-wrapper">
+                <input type="text" id="stockPrice" class="has-unit" placeholder="股價" oninput="formatInputWithComma(this, true); runRebalance()">
+                <span class="unit">元</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-title">3. 資產現況</div>
+    <div class="grid-2col">
+        <div class="form-group">
+            <label for="etfValue">正2總市值</label>
+            <div class="input-wrapper">
+                <input type="text" id="etfValue" class="has-unit" placeholder="市值" oninput="formatInputWithComma(this); runRebalance()">
+                <span class="unit">元</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="cashValue">現金餘額</label>
+            <div class="input-wrapper">
+                <input type="text" id="cashValue" class="has-unit" placeholder="現金" oninput="formatInputWithComma(this); runRebalance()">
+                <span class="unit">元</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="market-status-box">
+        <div class="market-flex">
+            <div class="market-info-text" id="fear-greed-text">狀態：--</div>
+            <div>
+                <label for="manualScore" style="font-size: 10px; font-weight: 700; text-align: center; margin-bottom: 2px; display: block; color: var(--text-main);"></label>
+                <input type="text" id="manualScore" class="market-input-style" value="50" oninput="validateScore(this); runRebalance()">
+            </div>
+        </div>
+    </div>
+
+    <div class="result-panel">
+        <div class="dashboard-grid-3col">
+            <div class="dashboard-item">
+                <span>總資產</span>
+                <strong id="lblTotal">0</strong>
+            </div>
+            <div class="dashboard-item">
+                <span>持股比例</span>
+                <strong id="lblRatio">0%</strong>
+            </div>
+ <div class="dashboard-item">
+                <span>Beta</span>
+                <strong id="lblBetaValue">0.00X</strong>
+            </div>
+        </div>
+        <div class="dynamic-range-box" id="lblDynamicRange">更新中...</div>
+        <div id="signalContainer" class="signal-card"></div>
+    </div>
+</div>
+
+<script>
+    window.addEventListener('DOMContentLoaded', () => { loadSavedValues(); runRebalance(); });
+
+    function getPureNumber(v) { return parseFloat(v.toString().replace(/,/g, '')) || 0; }
+    function formatInputWithComma(input, isF) { 
+        let pos = input.selectionStart, len = input.value.length;
+        let pure = isF ? input.value.replace(/[^\d.]/g, '') : input.value.replace(/[^\d]/g, '');
+        if (!pure) { input.value = ""; return; }
+        let p = pure.split('.');
+        p[0] = p[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        let val = isF && pure.includes('.') ? p.join('.') : p[0];
+        input.value = val;
+        input.setSelectionRange(pos+(val.length-len), pos+(val.length-len));
+    }
+    function validatePercent(i) { i.value = i.value.replace(/[^\d]/g, ''); if (parseInt(i.value)>100) i.value="100"; }
+    function validateScore(i) { i.value = i.value.replace(/[^\d]/g, ''); if (parseInt(i.value)>100) i.value="100"; }
+    
+    function loadSavedValues() {
+        ['etfValue', 'cashValue', 'stockPrice', 'targetRatio', 'thresholdPercent', 'quantTarget', 'manualScore'].forEach(id => {
+            if (localStorage.getItem('saved_'+id)) {
+                document.getElementById(id).value = localStorage.getItem('saved_'+id);
+                if (id !== 'quantTarget' && id !== 'manualScore' && id !== 'targetRatio' && id !== 'thresholdPercent') formatInputWithComma(document.getElementById(id), id === 'stockPrice');
+            }
+        });
+    }
+
+    function runRebalance() {
+        ['etfValue', 'cashValue', 'stockPrice', 'targetRatio', 'thresholdPercent', 'quantTarget', 'manualScore'].forEach(id => localStorage.setItem('saved_'+id, document.getElementById(id).value.replace(/,/g, '')));
+        
+        const score = parseInt(document.getElementById('manualScore').value) || 50;
+        let status = score >= 75 ? "極度貪婪" : score >= 55 ? "貪婪" : score >= 45 ? "中立" : score >= 25 ? "恐懼" : "極度恐懼";
+        document.getElementById('fear-greed-text').innerText = `CNN 恐懼與貪婪指數：${score} (${status})`;
+
+        const targetRatio = getPureNumber(document.getElementById('targetRatio').value)/100;
+        const quantRatio = getPureNumber(document.getElementById('quantTarget').value)/100;
+        const etfVal = getPureNumber(document.getElementById('etfValue').value);
+        const cashVal = getPureNumber(document.getElementById('cashValue').value);
+        const price = getPureNumber(document.getElementById('stockPrice').value);
+        const total = etfVal + cashVal;
+
+        if (total === 0) return;
+
+        let budget = score >= 76 ? 0 : score >= 45 ? 0.10 - ((score-45)/30)*0.08 : score >= 25 ? 0.10 + ((44-score)/20)*0.10 : 0.20 + ((24-score)/24)*0.15;
+        
+        document.getElementById('lblTotal').innerText = new Intl.NumberFormat().format(total);
+        document.getElementById('lblRatio').innerText = (etfVal/total*100).toFixed(0) + "%";
+        document.getElementById('lblBetaValue').innerText = (etfVal/total*2).toFixed(2) + "X";
+        document.getElementById('lblDynamicRange').innerText = `( 戰略中軸 ${(targetRatio*2).toFixed(2)} | 觸發 ±${getPureNumber(document.getElementById('thresholdPercent').value)}% )`;
+
+        const sig = document.getElementById('signalContainer');
+        const target = total * Math.min(quantRatio, targetRatio + 0.10);
+        const lower = (targetRatio*total) * (1 - getPureNumber(document.getElementById('thresholdPercent').value)/100);
+        const upper = (targetRatio*total) * (1 + getPureNumber(document.getElementById('thresholdPercent').value)/100);
+
+        if (etfVal < lower && etfVal < target) {
+            let buy = Math.floor((target - etfVal) * budget);
+            sig.className = "signal-card signal-buy";
+            sig.innerHTML = `<div class="signal-title">🚨 偏離下限：布局建議</div><span class="action-amount">+$${new Intl.NumberFormat().format(Math.min(buy, cashVal))}</span><div class="highlight-shares-box">預估布局 ${Math.floor(Math.min(buy, cashVal)/price)} 股</div>`;
+        } else if (etfVal > upper && etfVal > target) {
+            let sell = Math.ceil(etfVal - target);
+            sig.className = "signal-card signal-sell";
+            sig.innerHTML = `<div class="signal-title">🚨 偏離上限：調節建議</div><span class="action-amount">-$${new Intl.NumberFormat().format(sell)}</span><div class="highlight-shares-box">預估應調節 ${Math.ceil(sell/price)} 股</div>`;
+        } else {
+            sig.className = "signal-card signal-hold";
+            sig.innerHTML = `<div class="signal-title">✅ 閾值內正常範圍</div><div style="font-size:11px; color:#dee2e6;">目前配置處於平衡狀態。</div>`;
+        }
+    }
+</script>
+</body>
+</html>
