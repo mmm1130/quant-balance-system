@@ -8,17 +8,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Urbanist:wght@600;700&display=swap" rel="stylesheet">
     <style>
-        /* 莫蘭迪現代藍灰 (Slate) 色系 */
+        /* 舒服淺奶茶粉色系 (Light Milk Tea Pink) */
         :root {
-            --bg-color: #eef2f6;       
-            --card-bg: #ffffff;        
-            --text-main: #334155;      
-            --text-muted: #64748b;     
-            --accent-border: #cbd5e1;  
-            --input-bg: #f8fafc;       
-            --panel-bg: #f1f5f9;       
-            --accent-green: #10b981;   
-            --accent-red: #ef4444;     
+            --bg-color: #FAF4F2;       /* 淺奶茶微粉背景 */
+            --card-bg: #FFFFFF;        /* 潔淨白卡片 */
+            --text-main: #6B5B53;      /* 溫潤深棕灰 (主文字) */
+            --text-muted: #A3968F;     /* 柔和奶茶灰 (次要文字) */
+            --accent-border: #E8D9D1;  /* 奶茶粉邊框 */
+            --input-bg: #FDFBFA;       /* 淺白微透粉輸入框底色 */
+            --panel-bg: #F6EFEA;       /* 區塊底色 */
+            --accent-green: #7CA996;   /* 柔和莫蘭迪綠 */
+            --accent-red: #D27E7E;     /* 溫柔豆沙粉紅 */
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -26,12 +26,12 @@
         body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Noto Sans TC', 'Urbanist', sans-serif; display: flex; justify-content: center; align-items: center; padding: 4px; }
 
         .container {
-            width: 100%; max-width: 415px; background: var(--card-bg); border: 1px solid #e2e8f0;
-            border-radius: 12px; padding: 8px 14px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+            width: 100%; max-width: 415px; background: var(--card-bg); border: 1px solid var(--accent-border);
+            border-radius: 12px; padding: 8px 14px; box-shadow: 0 8px 30px rgba(180, 160, 150, 0.12);
             display: flex; flex-direction: column;
         }
 
-        h1 { font-size: 18px; font-weight: 700; text-align: center; margin-bottom: 1px; color: #0f172a; letter-spacing: 0.5px; }
+        h1 { font-size: 18px; font-weight: 700; text-align: center; margin-bottom: 1px; color: #51433C; letter-spacing: 0.5px; }
         .subtitle { font-size: 11px; color: var(--text-muted); text-align: center; margin-bottom: 6px; letter-spacing: 0.3px; }
         .section-title { font-size: 12px; color: var(--text-main); font-weight: 700; margin-bottom: 4px; border-bottom: 2px solid var(--accent-border); padding-bottom: 2px; letter-spacing: 0.5px; text-transform: uppercase; }
         
@@ -45,9 +45,9 @@
         input {
             width: 100%; padding: 5px 8px; background: var(--input-bg); border: 1px solid var(--accent-border);
             border-radius: 5px; color: var(--text-main); font-size: 13.5px; font-family: 'Urbanist', 'Noto Sans TC', sans-serif;
-            font-weight: 700; transition: all 0.1s ease;
+            font-weight: 700; transition: all 0.2s ease;
         }
-        input:focus { outline: none; border-color: #94a3b8; background: #fff; }
+        input:focus { outline: none; border-color: #D1BBAE; background: #fff; box-shadow: 0 0 0 2px rgba(209, 187, 174, 0.2); }
         .unit { position: absolute; right: 8px; color: var(--text-muted); font-size: 11px; pointer-events: none; font-weight: 700; }
         .has-unit { padding-right: 22px; }
 
@@ -57,17 +57,17 @@
         .quant-input-style { width: 70px; padding: 3px 6px; text-align: center; font-size: 14.5px !important; font-weight: 700 !important; border: 1px solid var(--accent-border) !important; border-radius: 5px; color: var(--text-main) !important; background: var(--card-bg); }
 
         .primary-asset-label { font-size: 12px !important; color: var(--text-main); margin-bottom: 3px; }
-        .primary-asset-input { font-size: 15px !important; padding: 6px 8px !important; padding-right: 24px !important; height: 32px; color: #0f172a !important; background-color: var(--card-bg); border: 1px solid var(--accent-border); }
+        .primary-asset-input { font-size: 15px !important; padding: 6px 8px !important; padding-right: 24px !important; height: 32px; color: #51433C !important; background-color: var(--card-bg); border: 1px solid var(--accent-border); }
         .primary-unit { font-size: 11.5px !important; right: 8px !important; }
 
         .result-panel { margin-top: 4px; border-top: 1px solid var(--accent-border); padding-top: 5px; }
         .dashboard-grid-3col { display: grid; grid-template-columns: 1fr 1.1fr 1fr; gap: 5px; margin-bottom: 4px; }
-        .dashboard-item { background: var(--panel-bg); padding: 8px 2px; border-radius: 6px; border: 1px solid var(--accent-border); box-shadow: 0 2px 4px rgba(0,0,0,0.02); text-align: center; }
+        .dashboard-item { background: var(--panel-bg); padding: 8px 2px; border-radius: 6px; border: 1px solid var(--accent-border); box-shadow: 0 2px 4px rgba(0,0,0,0.01); text-align: center; }
         .dashboard-item span { display: block; font-size: 10px; color: var(--text-muted); margin-bottom: 2px; white-space: nowrap; font-weight: 700; letter-spacing: 0.2px; }
-        .dashboard-item strong { font-size: 15.5px; font-family: 'Urbanist', sans-serif; color: #0f172a; font-weight: 700; }
+        .dashboard-item strong { font-size: 15.5px; font-family: 'Urbanist', sans-serif; color: #51433C; font-weight: 700; }
         .dynamic-range-box { text-align: center; font-size: 10px; color: var(--text-muted); margin-bottom: 4px; font-weight: 700; letter-spacing: 0.3px; }
 
-        .signal-card { padding: 10px; border-radius: 8px; text-align: center; font-size: 12px; line-height: 1.5; background: var(--panel-bg); border: 1px solid var(--accent-border); box-shadow: 0 4px 10px rgba(0,0,0,0.04); }
+        .signal-card { padding: 10px; border-radius: 8px; text-align: center; font-size: 12px; line-height: 1.5; background: var(--panel-bg); border: 1px solid var(--accent-border); box-shadow: 0 4px 10px rgba(180, 160, 150, 0.08); }
         .signal-title { font-size: 14.5px; font-weight: 700; margin-bottom: 1px; letter-spacing: 0.3px; color: var(--text-main); }
         .action-amount { font-size: 26px; font-weight: 700; font-family: 'Urbanist', sans-serif; margin: 2px 0; display: block; letter-spacing: 0.5px; }
         .signal-buy .action-amount { color: var(--accent-green); } 
@@ -195,14 +195,14 @@
         
         const score = parseInt(document.getElementById('manualScore').value) || 50;
         
-        // 動態恐貪指數標籤顏色 (漸進式顯眼)
+        // 動態恐貪指數標籤顏色 (配合奶茶粉色系調和，顏色變柔和)
         let fgStatus = "";
         let fgColor = "";
-        if (score >= 75) { fgStatus = "極度貪婪"; fgColor = "#059669"; } // 深綠
-        else if (score >= 55) { fgStatus = "貪婪"; fgColor = "#10b981"; } // 亮綠
-        else if (score >= 45) { fgStatus = "中立"; fgColor = "#64748b"; } // 灰藍
-        else if (score >= 25) { fgStatus = "恐懼"; fgColor = "#ea580c"; } // 橘紅 (開始明顯)
-        else { fgStatus = "極度恐懼"; fgColor = "#dc2626"; } // 大紅 (非常明顯)
+        if (score >= 75) { fgStatus = "極度貪婪"; fgColor = "#5A8B78"; } // 深莫蘭迪綠
+        else if (score >= 55) { fgStatus = "貪婪"; fgColor = "#7CA996"; } // 淺柔綠
+        else if (score >= 45) { fgStatus = "中立"; fgColor = "#A3968F"; } // 奶茶灰
+        else if (score >= 25) { fgStatus = "恐懼"; fgColor = "#D59A83"; } // 暖粉橘
+        else { fgStatus = "極度恐懼"; fgColor = "#D27E7E"; } // 豆沙粉紅
 
         document.getElementById('fear-greed-text').innerHTML = `恐懼與貪婪指數：<span style="font-family:'Urbanist'; font-size:15px; margin-left:4px;">${score}</span> <span style="color:${fgColor}; background-color:${fgColor}1a; padding:2px 6px; border-radius:5px; font-size:11.5px; margin-left:6px; font-weight:700;">${fgStatus}</span>`;
 
