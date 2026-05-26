@@ -8,15 +8,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Urbanist:wght@600;700&display=swap" rel="stylesheet">
     <style>
+        /* 莫蘭迪現代藍灰 (Slate) 色系 */
         :root {
-            --bg-color: #f1f3f5;       
+            --bg-color: #eef2f6;       
             --card-bg: #ffffff;        
-            --text-main: #212529;      
-            --text-muted: #5a626a;     
-            --accent-border: #ced4da;  
-            --input-bg: #f8f9fa;       
-            --accent-green: #2ecc71;   
-            --accent-red: #ff7675;     
+            --text-main: #334155;      
+            --text-muted: #64748b;     
+            --accent-border: #cbd5e1;  
+            --input-bg: #f8fafc;       
+            --panel-bg: #f1f5f9;       
+            --accent-green: #10b981;   
+            --accent-red: #ef4444;     
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -24,17 +26,17 @@
         body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Noto Sans TC', 'Urbanist', sans-serif; display: flex; justify-content: center; align-items: center; padding: 4px; }
 
         .container {
-            width: 100%; max-width: 415px; background: var(--card-bg); border: 1px solid var(--accent-border);
-            border-radius: 12px; padding: 8px 14px; box-shadow: 0 6px 25px rgba(0, 0, 0, 0.04);
+            width: 100%; max-width: 415px; background: var(--card-bg); border: 1px solid #e2e8f0;
+            border-radius: 12px; padding: 8px 14px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
             display: flex; flex-direction: column;
         }
 
-        h1 { font-size: 18px; font-weight: 700; text-align: center; margin-bottom: 1px; color: var(--text-main); letter-spacing: 0.5px; }
+        h1 { font-size: 18px; font-weight: 700; text-align: center; margin-bottom: 1px; color: #0f172a; letter-spacing: 0.5px; }
         .subtitle { font-size: 11px; color: var(--text-muted); text-align: center; margin-bottom: 6px; letter-spacing: 0.3px; }
-        .section-title { font-size: 12px; color: var(--text-main); font-weight: 700; margin-bottom: 4px; border-bottom: 2px solid var(--text-main); padding-bottom: 2px; letter-spacing: 0.5px; text-transform: uppercase; }
+        .section-title { font-size: 12px; color: var(--text-main); font-weight: 700; margin-bottom: 4px; border-bottom: 2px solid var(--accent-border); padding-bottom: 2px; letter-spacing: 0.5px; text-transform: uppercase; }
         
         .grid-3col { display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 6px; margin-bottom: 4px; }
-        .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 4px; }
+        .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 4px; }
         
         .form-group { margin-bottom: 1px; }
         label { display: block; font-size: 11.5px; font-weight: 700; margin-bottom: 3px; color: var(--text-main); white-space: nowrap; letter-spacing: 0.2px; }
@@ -45,38 +47,34 @@
             border-radius: 5px; color: var(--text-main); font-size: 13.5px; font-family: 'Urbanist', 'Noto Sans TC', sans-serif;
             font-weight: 700; transition: all 0.1s ease;
         }
-        input:focus { outline: none; border-color: #212529; background: #fff; }
+        input:focus { outline: none; border-color: #94a3b8; background: #fff; }
         .unit { position: absolute; right: 8px; color: var(--text-muted); font-size: 11px; pointer-events: none; font-weight: 700; }
         .has-unit { padding-right: 22px; }
 
-        .quant-input-box { margin: 1px 0 5px 0; padding: 5px 10px; border: 1.5px solid var(--text-main); border-radius: 6px; background-color: #fffaf0; }
+        .quant-input-box { margin: 1px 0 5px 0; padding: 4px 10px; border: 1px solid var(--accent-border); border-radius: 6px; background-color: var(--panel-bg); display: flex; flex-direction: column; gap: 2px; }
         .quant-flex { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-        .quant-label { font-size: 13.5px !important; font-weight: 700 !important; color: var(--text-main) !important; letter-spacing: 0.3px; }
-        .quant-input-style { width: 70px; padding: 3px 6px; text-align: center; font-size: 14.5px !important; font-weight: 700 !important; border: 1.5px solid var(--text-main) !important; border-radius: 5px; color: var(--text-main) !important; background: #ffffff; }
+        .quant-label { font-size: 13.5px !important; font-weight: 700 !important; color: var(--text-main) !important; letter-spacing: 0.3px; display: flex; align-items: center;}
+        .quant-input-style { width: 70px; padding: 3px 6px; text-align: center; font-size: 14.5px !important; font-weight: 700 !important; border: 1px solid var(--accent-border) !important; border-radius: 5px; color: var(--text-main) !important; background: var(--card-bg); }
 
-        .market-status-box { margin: 4px 0; padding: 6px 10px; border: 1px solid var(--accent-border); border-radius: 6px; background-color: var(--input-bg); }
-        .market-flex { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-        .market-info-text { font-size: 13px; line-height: 1.6; color: var(--text-main); flex: 1; font-weight: 700; }
-        .market-input-style { width: 58px; padding: 3px; text-align: center; font-size: 14px; font-weight: 700; border-radius: 5px; border: 1px solid var(--accent-border); background-color: var(--card-bg); }
+        .primary-asset-label { font-size: 12px !important; color: var(--text-main); margin-bottom: 3px; }
+        .primary-asset-input { font-size: 15px !important; padding: 6px 8px !important; padding-right: 24px !important; height: 32px; color: #0f172a !important; background-color: var(--card-bg); border: 1px solid var(--accent-border); }
+        .primary-unit { font-size: 11.5px !important; right: 8px !important; }
 
         .result-panel { margin-top: 4px; border-top: 1px solid var(--accent-border); padding-top: 5px; }
         .dashboard-grid-3col { display: grid; grid-template-columns: 1fr 1.1fr 1fr; gap: 5px; margin-bottom: 4px; }
-        .dashboard-item { background: var(--input-bg); padding: 8px 2px; border-radius: 6px; border: 1px solid var(--accent-border); text-align: center; }
+        .dashboard-item { background: var(--panel-bg); padding: 8px 2px; border-radius: 6px; border: 1px solid var(--accent-border); box-shadow: 0 2px 4px rgba(0,0,0,0.02); text-align: center; }
         .dashboard-item span { display: block; font-size: 10px; color: var(--text-muted); margin-bottom: 2px; white-space: nowrap; font-weight: 700; letter-spacing: 0.2px; }
-        .dashboard-item strong { font-size: 15.5px; font-family: 'Urbanist', sans-serif; color: var(--text-main); font-weight: 700; }
-        .beta-box { background: #343a40; border: 1px solid #343a40; }
-        .beta-box span { color: #dee2e6; }
-        .beta-value-text { font-size: 16.5px !important; color: #ffffff !important; font-weight: 700; } 
+        .dashboard-item strong { font-size: 15.5px; font-family: 'Urbanist', sans-serif; color: #0f172a; font-weight: 700; }
         .dynamic-range-box { text-align: center; font-size: 10px; color: var(--text-muted); margin-bottom: 4px; font-weight: 700; letter-spacing: 0.3px; }
 
-        .signal-card { padding: 8px 10px; border-radius: 7px; text-align: center; font-size: 12px; line-height: 1.5; background: #1f2421; border: 1px solid #1f2421; }
-        .signal-title { font-size: 14.5px; font-weight: 700; margin-bottom: 1px; letter-spacing: 0.3px; color: #ffffff; }
-        .action-amount { font-size: 26px; font-weight: 700; font-family: 'Urbanist', sans-serif; margin: 1px 0; display: block; letter-spacing: 0.5px; }
-        .signal-buy .action-amount { color: #2ecc71; } 
-        .signal-sell .action-amount { color: #ff7675; } 
-        .signal-hold .action-amount { color: #dee2e6; }
+        .signal-card { padding: 10px; border-radius: 8px; text-align: center; font-size: 12px; line-height: 1.5; background: var(--panel-bg); border: 1px solid var(--accent-border); box-shadow: 0 4px 10px rgba(0,0,0,0.04); }
+        .signal-title { font-size: 14.5px; font-weight: 700; margin-bottom: 1px; letter-spacing: 0.3px; color: var(--text-main); }
+        .action-amount { font-size: 26px; font-weight: 700; font-family: 'Urbanist', sans-serif; margin: 2px 0; display: block; letter-spacing: 0.5px; }
+        .signal-buy .action-amount { color: var(--accent-green); } 
+        .signal-sell .action-amount { color: var(--accent-red); } 
+        .signal-hold .action-amount { color: var(--text-muted); }
 
-        .highlight-shares-box { margin-top: 4px; padding: 6px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 5px; font-size: 13.5px; font-weight: 700; color: #ffffff; letter-spacing: 0.3px; }
+        .highlight-shares-box { margin-top: 4px; padding: 6px; background: var(--card-bg); border: 1px solid var(--accent-border); border-radius: 5px; font-size: 13.5px; font-weight: 700; color: var(--text-main); letter-spacing: 0.3px; }
     </style>
 </head>
 <body>
@@ -88,10 +86,17 @@
     <div class="section-title">1. 量化導航</div>
     <div class="quant-input-box">
         <div class="quant-flex">
-            <div class="quant-label">📊 模型持股配置：</div>
+            <div class="quant-label">方舟模型持股配置：</div>
             <div class="input-wrapper">
                 <input type="text" id="quantTarget" class="quant-input-style has-unit" value="67.9" oninput="runRebalance()">
                 <span class="unit" style="right:10px; color:var(--text-main); font-size: 11px; font-weight: 700;">%</span>
+            </div>
+        </div>
+        <div style="height: 1px; background-color: var(--accent-border); opacity: 0.6; margin: 1px 0;"></div>
+        <div class="quant-flex">
+            <div class="quant-label" id="fear-greed-text">恐懼與貪婪指數：--</div>
+            <div class="input-wrapper">
+                <input type="text" id="manualScore" class="quant-input-style" value="50" oninput="validateScore(this); runRebalance()">
             </div>
         </div>
     </div>
@@ -124,27 +129,17 @@
     <div class="section-title">3. 資產現況</div>
     <div class="grid-2col">
         <div class="form-group">
-            <label for="etfValue">正2總市值</label>
+            <label for="etfValue" class="primary-asset-label">正2總市值</label>
             <div class="input-wrapper">
-                <input type="text" id="etfValue" class="has-unit" placeholder="市值" oninput="formatInputWithComma(this); runRebalance()">
-                <span class="unit">元</span>
+                <input type="text" id="etfValue" class="has-unit primary-asset-input" placeholder="市值" oninput="formatInputWithComma(this); runRebalance()">
+                <span class="unit primary-unit">元</span>
             </div>
         </div>
         <div class="form-group">
-            <label for="cashValue">現金餘額</label>
+            <label for="cashValue" class="primary-asset-label">現金餘額</label>
             <div class="input-wrapper">
-                <input type="text" id="cashValue" class="has-unit" placeholder="現金" oninput="formatInputWithComma(this); runRebalance()">
-                <span class="unit">元</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="market-status-box">
-        <div class="market-flex">
-            <div class="market-info-text" id="fear-greed-text">狀態：--</div>
-            <div>
-                <label for="manualScore" style="font-size: 10px; font-weight: 700; text-align: center; margin-bottom: 2px; display: block; color: var(--text-main);"></label>
-                <input type="text" id="manualScore" class="market-input-style" value="50" oninput="validateScore(this); runRebalance()">
+                <input type="text" id="cashValue" class="has-unit primary-asset-input" placeholder="現金" oninput="formatInputWithComma(this); runRebalance()">
+                <span class="unit primary-unit">元</span>
             </div>
         </div>
     </div>
@@ -159,7 +154,7 @@
                 <span>持股比例</span>
                 <strong id="lblRatio">0%</strong>
             </div>
- <div class="dashboard-item">
+            <div class="dashboard-item">
                 <span>Beta</span>
                 <strong id="lblBetaValue">0.00X</strong>
             </div>
@@ -199,8 +194,17 @@
         ['etfValue', 'cashValue', 'stockPrice', 'targetRatio', 'thresholdPercent', 'quantTarget', 'manualScore'].forEach(id => localStorage.setItem('saved_'+id, document.getElementById(id).value.replace(/,/g, '')));
         
         const score = parseInt(document.getElementById('manualScore').value) || 50;
-        let status = score >= 75 ? "極度貪婪" : score >= 55 ? "貪婪" : score >= 45 ? "中立" : score >= 25 ? "恐懼" : "極度恐懼";
-        document.getElementById('fear-greed-text').innerText = `CNN 恐懼與貪婪指數：${score} (${status})`;
+        
+        // 動態恐貪指數標籤顏色 (漸進式顯眼)
+        let fgStatus = "";
+        let fgColor = "";
+        if (score >= 75) { fgStatus = "極度貪婪"; fgColor = "#059669"; } // 深綠
+        else if (score >= 55) { fgStatus = "貪婪"; fgColor = "#10b981"; } // 亮綠
+        else if (score >= 45) { fgStatus = "中立"; fgColor = "#64748b"; } // 灰藍
+        else if (score >= 25) { fgStatus = "恐懼"; fgColor = "#ea580c"; } // 橘紅 (開始明顯)
+        else { fgStatus = "極度恐懼"; fgColor = "#dc2626"; } // 大紅 (非常明顯)
+
+        document.getElementById('fear-greed-text').innerHTML = `恐懼與貪婪指數：<span style="font-family:'Urbanist'; font-size:15px; margin-left:4px;">${score}</span> <span style="color:${fgColor}; background-color:${fgColor}1a; padding:2px 6px; border-radius:5px; font-size:11.5px; margin-left:6px; font-weight:700;">${fgStatus}</span>`;
 
         const targetRatio = getPureNumber(document.getElementById('targetRatio').value)/100;
         const quantRatio = getPureNumber(document.getElementById('quantTarget').value)/100;
@@ -233,7 +237,7 @@
             sig.innerHTML = `<div class="signal-title">🚨 偏離上限：調節建議</div><span class="action-amount">-$${new Intl.NumberFormat().format(sell)}</span><div class="highlight-shares-box">預估應調節 ${Math.ceil(sell/price)} 股</div>`;
         } else {
             sig.className = "signal-card signal-hold";
-            sig.innerHTML = `<div class="signal-title">✅ 閾值內正常範圍</div><div style="font-size:11px; color:#dee2e6;">目前配置處於平衡狀態。</div>`;
+            sig.innerHTML = `<div class="signal-title">✅ 閾值內正常範圍</div><div style="font-size:11.5px; color:var(--text-muted); font-weight:700; margin-top:4px;">目前配置處於平衡狀態。</div>`;
         }
     }
 </script>
