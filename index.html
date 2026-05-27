@@ -6,9 +6,9 @@
     <title>量化持股配置平衡系統</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Urbanist:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Urbanist:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* 舒服淺奶茶粉色系 (Light Milk Tea Pink) - 舒展放大版 */
+        /* 舒服淺奶茶粉色系 - 適中舒適版 (大字體 + 緊湊排版) */
         :root {
             --bg-color: #FAF4F2;       
             --card-bg: #FFFFFF;        
@@ -23,36 +23,31 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        /* 調整：放寬高度限制，允許垂直滾動以防大字體溢出 */
         html, body { min-height: 100vh; overflow-y: auto; }
-        body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Noto Sans TC', 'Urbanist', sans-serif; display: flex; justify-content: center; align-items: center; padding: 16px 8px; }
+        body { background-color: var(--bg-color); color: var(--text-main); font-family: 'Noto Sans TC', 'Urbanist', sans-serif; display: flex; justify-content: center; align-items: center; padding: 12px 6px; }
 
         .container {
-            width: 100%; max-width: 435px; /* 微調寬度以容納放大後的字體 */
+            width: 100%; max-width: 420px; 
             background: var(--card-bg); border: 1px solid var(--accent-border);
-            border-radius: 12px; padding: 16px 20px; /* 增加內邊距，讓邊緣更舒適 */
+            border-radius: 12px; padding: 12px 16px; 
             box-shadow: 0 8px 30px rgba(180, 160, 150, 0.12);
             display: flex; flex-direction: column;
         }
 
-        /* 調整：提升主要標題與副標題字體與間距 */
-        h1 { font-size: 21px; font-weight: 700; text-align: center; margin-bottom: 4px; color: var(--text-dark); letter-spacing: 0.5px; }
-        .subtitle { font-size: 13px; color: var(--text-muted); text-align: center; margin-bottom: 14px; letter-spacing: 0.3px; }
+        h1 { font-size: 20px; font-weight: 700; text-align: center; margin-bottom: 2px; color: var(--text-dark); letter-spacing: 0.5px; }
+        .subtitle { font-size: 13px; color: var(--text-muted); text-align: center; margin-bottom: 10px; letter-spacing: 0.3px; }
         
-        /* 調整：加大區域標題的上邊距與下邊距，拉開層次 */
-        .section-title { font-size: 14px; color: var(--text-dark); font-weight: 700; margin-top: 14px; margin-bottom: 10px; border-bottom: 2px solid var(--accent-border); padding-bottom: 4px; letter-spacing: 0.5px; text-transform: uppercase; }
+        .section-title { font-size: 14px; color: var(--text-dark); font-weight: 700; margin-top: 10px; margin-bottom: 6px; border-bottom: 2px solid var(--accent-border); padding-bottom: 4px; letter-spacing: 0.5px; text-transform: uppercase; }
         
-        /* 調整：加大網格框線之間的空隙 */
-        .grid-3col { display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 10px; margin-bottom: 8px; }
-        .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 8px; }
+        .grid-3col { display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 8px; margin-bottom: 6px; }
+        .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 6px; }
         
-        .form-group { margin-bottom: 4px; }
-        .form-group label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 5px; color: var(--text-main); white-space: nowrap; letter-spacing: 0.2px; }
+        .form-group { margin-bottom: 2px; }
+        .form-group label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 4px; color: var(--text-main); white-space: nowrap; letter-spacing: 0.2px; }
         .input-wrapper { position: relative; display: flex; align-items: center; }
         
-        /* 調整：加大輸入框內襯與字體 */
         input {
-            width: 100%; padding: 7px 10px; background: var(--input-bg); border: 1px solid var(--accent-border);
+            width: 100%; padding: 6px 8px; background: var(--input-bg); border: 1px solid var(--accent-border);
             border-radius: 5px; color: var(--text-dark); font-size: 15px; font-family: 'Urbanist', 'Noto Sans TC', sans-serif;
             font-weight: 700; transition: all 0.2s ease;
         }
@@ -60,33 +55,30 @@
         .unit { position: absolute; right: 10px; color: var(--text-muted); font-size: 13px; pointer-events: none; font-weight: 700; }
         .has-unit { padding-right: 28px; }
 
-        /* 調整：加大上方導航面板的內外間距 */
-        .quant-input-box { margin: 4px 0 10px 0; padding: 10px 14px; border: 1px solid var(--accent-border); border-radius: 6px; background-color: var(--panel-bg); display: flex; flex-direction: column; gap: 8px; }
-        .quant-flex { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+        .quant-input-box { margin: 2px 0 8px 0; padding: 8px 12px; border: 1px solid var(--accent-border); border-radius: 6px; background-color: var(--panel-bg); display: flex; flex-direction: column; gap: 6px; }
+        .quant-flex { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
         .quant-label { font-size: 14px !important; font-weight: 700 !important; color: var(--text-main) !important; letter-spacing: 0.3px; display: flex; align-items: center;}
-        .quant-input-style { width: 75px; padding: 5px 8px; text-align: center; font-size: 15.5px !important; font-weight: 700 !important; border: 1px solid var(--accent-border) !important; border-radius: 5px; color: var(--text-dark) !important; background: var(--card-bg); }
+        .quant-input-style { width: 75px; padding: 4px 6px; text-align: center; font-size: 15.5px !important; font-weight: 700 !important; border: 1px solid var(--accent-border) !important; border-radius: 5px; color: var(--text-dark) !important; background: var(--card-bg); }
 
-        .primary-asset-label { font-size: 13.5px !important; color: var(--text-main); margin-bottom: 5px; }
-        .primary-asset-input { font-size: 16px !important; padding: 7px 10px !important; padding-right: 28px !important; height: 36px; color: var(--text-dark) !important; background-color: var(--card-bg); border: 1px solid var(--accent-border); }
+        .primary-asset-label { font-size: 13.5px !important; color: var(--text-main); margin-bottom: 4px; }
+        .primary-asset-input { font-size: 16px !important; padding: 6px 8px !important; padding-right: 28px !important; height: 34px; color: var(--text-dark) !important; background-color: var(--card-bg); border: 1px solid var(--accent-border); }
         .primary-unit { font-size: 13px !important; right: 10px !important; }
 
-        /* 調整：下方結果面板與儀表板卡片分散 */
-        .result-panel { margin-top: 16px; border-top: 1px solid var(--accent-border); padding-top: 12px; }
-        .dashboard-grid-3col { display: grid; grid-template-columns: 1fr 1.1fr 1fr; gap: 8px; margin-bottom: 10px; }
-        .dashboard-item { background: var(--panel-bg); padding: 10px 4px; border-radius: 6px; border: 1px solid var(--accent-border); box-shadow: 0 2px 4px rgba(0,0,0,0.01); text-align: center; }
-        .dashboard-item span { display: block; font-size: 12.5px; color: var(--text-muted); margin-bottom: 4px; white-space: nowrap; font-weight: 700; letter-spacing: 0.2px; }
+        .result-panel { margin-top: 10px; border-top: 1px solid var(--accent-border); padding-top: 10px; }
+        .dashboard-grid-3col { display: grid; grid-template-columns: 1fr 1.1fr 1fr; gap: 6px; margin-bottom: 8px; }
+        .dashboard-item { background: var(--panel-bg); padding: 8px 4px; border-radius: 6px; border: 1px solid var(--accent-border); box-shadow: 0 2px 4px rgba(0,0,0,0.01); text-align: center; }
+        .dashboard-item span { display: block; font-size: 12.5px; color: var(--text-muted); margin-bottom: 3px; white-space: nowrap; font-weight: 700; letter-spacing: 0.2px; }
         .dashboard-item strong { font-size: 18px; font-family: 'Urbanist', sans-serif; color: var(--text-dark); font-weight: 700; }
-        .dynamic-range-box { text-align: center; font-size: 12.5px; color: var(--text-muted); margin-bottom: 10px; font-weight: 700; letter-spacing: 0.3px; }
+        .dynamic-range-box { text-align: center; font-size: 12.5px; color: var(--text-muted); margin-bottom: 8px; font-weight: 700; letter-spacing: 0.3px; }
 
-        /* 調整：強化訊號卡片的視覺放大效果 */
-        .signal-card { padding: 14px; border-radius: 8px; text-align: center; font-size: 13.5px; line-height: 1.5; background: var(--panel-bg); border: 1px solid var(--accent-border); box-shadow: 0 4px 10px rgba(180, 160, 150, 0.08); }
-        .signal-title { font-size: 15.5px; font-weight: 700; margin-bottom: 4px; letter-spacing: 0.3px; color: var(--text-dark); }
-        .action-amount { font-size: 32px; font-weight: 700; font-family: 'Urbanist', sans-serif; margin: 4px 0; display: block; letter-spacing: 0.5px; }
+        .signal-card { padding: 12px; border-radius: 8px; text-align: center; font-size: 13.5px; line-height: 1.5; background: var(--panel-bg); border: 1px solid var(--accent-border); box-shadow: 0 4px 10px rgba(180, 160, 150, 0.08); }
+        .signal-title { font-size: 15.5px; font-weight: 700; margin-bottom: 3px; letter-spacing: 0.3px; color: var(--text-dark); }
+        .action-amount { font-size: 30px; font-weight: 700; font-family: 'Urbanist', sans-serif; margin: 3px 0; display: block; letter-spacing: 0.5px; }
         .signal-buy .action-amount { color: var(--accent-green); } 
         .signal-sell .action-amount { color: var(--accent-red); } 
         .signal-hold .action-amount { color: var(--text-muted); }
 
-        .highlight-shares-box { margin-top: 8px; padding: 8px; background: var(--card-bg); border: 1px solid var(--accent-border); border-radius: 5px; font-size: 14.5px; font-weight: 700; color: var(--text-dark); letter-spacing: 0.3px; }
+        .highlight-shares-box { margin-top: 6px; padding: 6px; background: var(--card-bg); border: 1px solid var(--accent-border); border-radius: 5px; font-size: 14.5px; font-weight: 700; color: var(--text-dark); letter-spacing: 0.3px; }
     </style>
 </head>
 <body>
@@ -98,7 +90,7 @@
     <div class="section-title">1. 量化導航</div>
     <div class="quant-input-box">
         <div class="quant-flex">
-            <div class="quant-label">方舟模型持股配置：</div>
+            <div class="quant-label">方舟模型配置：</div>
             <div class="input-wrapper">
                 <input type="text" id="quantTarget" class="quant-input-style has-unit" value="67.9" oninput="runRebalance()">
                 <span class="unit" style="right:10px; color:var(--text-muted); font-size: 13px; font-weight: 700;">%</span>
@@ -106,7 +98,8 @@
         </div>
         <div style="height: 1px; background-color: var(--accent-border); opacity: 0.8; margin: 2px 0;"></div>
         <div class="quant-flex">
-            <div class="quant-label" id="fear-greed-text">恐懼與貪婪指數：--</div>
+            <!-- 稍微縮短標題，把空間留給醒目的數值與標籤 -->
+            <div class="quant-label" id="fear-greed-text">恐貪指數：--</div>
             <div class="input-wrapper">
                 <input type="text" id="manualScore" class="quant-input-style" value="50" oninput="validateScore(this); runRebalance()">
             </div>
@@ -209,14 +202,19 @@
         
         let fgStatus = "";
         let fgColor = "";
-        if (score >= 75) { fgStatus = "極度貪婪"; fgColor = "#457361"; }
+        /* 微調色碼，讓實心背景配白字有更好的對比度 */
+        if (score >= 75) { fgStatus = "極度貪婪"; fgColor = "#3D6B57"; }
         else if (score >= 55) { fgStatus = "貪婪"; fgColor = "#5B8974"; } 
-        else if (score >= 45) { fgStatus = "中立"; fgColor = "#7E7068"; } 
+        else if (score >= 45) { fgStatus = "中立"; fgColor = "#8A7B72"; } 
         else if (score >= 25) { fgStatus = "恐懼"; fgColor = "#C47C62"; } 
         else { fgStatus = "極度恐懼"; fgColor = "#C16767"; } 
 
-        /* 調整：同步放大 JS 產生的恐貪數值字體 */
-        document.getElementById('fear-greed-text').innerHTML = `恐懼與貪婪指數：<span style="font-family:'Urbanist'; font-size:16px; margin-left:4px; color:var(--text-dark);">${score}</span> <span style="color:${fgColor}; background-color:${fgColor}20; padding:2px 6px; border-radius:5px; font-size:12.5px; margin-left:6px; font-weight:700;">${fgStatus}</span>`;
+        /* 
+           【加強醒目度】
+           1. 數字字體放大到 20px、加粗 (font-weight: 800) 並套用狀態顏色。
+           2. 狀態標籤改為「實心背景＋白色文字」，加上一點立體陰影 (box-shadow)。
+        */
+        document.getElementById('fear-greed-text').innerHTML = `恐懼與貪婪指數：<span style="font-family:'Urbanist'; font-size:20px; font-weight:800; margin-left:4px; color:${fgColor};">${score}</span> <span style="color:#FFFFFF; background-color:${fgColor}; padding:3px 8px; border-radius:6px; font-size:13.5px; margin-left:6px; font-weight:700; box-shadow: 0 2px 5px ${fgColor}66;">${fgStatus}</span>`;
 
         const targetRatio = getPureNumber(document.getElementById('targetRatio').value)/100;
         const quantRatio = getPureNumber(document.getElementById('quantTarget').value)/100;
@@ -239,7 +237,6 @@
         const lower = (targetRatio*total) * (1 - getPureNumber(document.getElementById('thresholdPercent').value)/100);
         const upper = (targetRatio*total) * (1 + getPureNumber(document.getElementById('thresholdPercent').value)/100);
 
-        /* 調整：同步放大動態生成的內部說明字體 */
         if (etfVal < lower && etfVal < target) {
             let buy = Math.floor((target - etfVal) * budget);
             sig.className = "signal-card signal-buy";
