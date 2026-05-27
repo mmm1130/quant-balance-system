@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Urbanist:wght@600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* 舒服淺奶茶粉色系 - 適中舒適版 (大字體 + 緊湊排版) */
+        /* 舒服淺奶茶粉色系 - 適中舒適版 (微調第一區塊緊密度) */
         :root {
             --bg-color: #FAF4F2;       
             --card-bg: #FFFFFF;        
@@ -55,7 +55,8 @@
         .unit { position: absolute; right: 10px; color: var(--text-muted); font-size: 13px; pointer-events: none; font-weight: 700; }
         .has-unit { padding-right: 28px; }
 
-        .quant-input-box { margin: 2px 0 8px 0; padding: 8px 12px; border: 1px solid var(--accent-border); border-radius: 6px; background-color: var(--panel-bg); display: flex; flex-direction: column; gap: 6px; }
+        /* 【微調重點】縮減第一區塊內襯(padding 8px->6px)與間距(gap 6px->4px) */
+        .quant-input-box { margin: 2px 0 8px 0; padding: 6px 12px; border: 1px solid var(--accent-border); border-radius: 6px; background-color: var(--panel-bg); display: flex; flex-direction: column; gap: 4px; }
         .quant-flex { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
         .quant-label { font-size: 14px !important; font-weight: 700 !important; color: var(--text-main) !important; letter-spacing: 0.3px; display: flex; align-items: center;}
         .quant-input-style { width: 75px; padding: 4px 6px; text-align: center; font-size: 15.5px !important; font-weight: 700 !important; border: 1px solid var(--accent-border) !important; border-radius: 5px; color: var(--text-dark) !important; background: var(--card-bg); }
@@ -96,9 +97,9 @@
                 <span class="unit" style="right:10px; color:var(--text-muted); font-size: 13px; font-weight: 700;">%</span>
             </div>
         </div>
-        <div style="height: 1px; background-color: var(--accent-border); opacity: 0.8; margin: 2px 0;"></div>
+        <!-- 【微調重點】縮小分隔線的外距 (margin 1px 0) -->
+        <div style="height: 1px; background-color: var(--accent-border); opacity: 0.8; margin: 1px 0;"></div>
         <div class="quant-flex">
-            <!-- 稍微縮短標題，把空間留給醒目的數值與標籤 -->
             <div class="quant-label" id="fear-greed-text">恐貪指數：--</div>
             <div class="input-wrapper">
                 <input type="text" id="manualScore" class="quant-input-style" value="50" oninput="validateScore(this); runRebalance()">
@@ -202,18 +203,12 @@
         
         let fgStatus = "";
         let fgColor = "";
-        /* 微調色碼，讓實心背景配白字有更好的對比度 */
         if (score >= 75) { fgStatus = "極度貪婪"; fgColor = "#3D6B57"; }
         else if (score >= 55) { fgStatus = "貪婪"; fgColor = "#5B8974"; } 
         else if (score >= 45) { fgStatus = "中立"; fgColor = "#8A7B72"; } 
         else if (score >= 25) { fgStatus = "恐懼"; fgColor = "#C47C62"; } 
         else { fgStatus = "極度恐懼"; fgColor = "#C16767"; } 
 
-        /* 
-           【加強醒目度】
-           1. 數字字體放大到 20px、加粗 (font-weight: 800) 並套用狀態顏色。
-           2. 狀態標籤改為「實心背景＋白色文字」，加上一點立體陰影 (box-shadow)。
-        */
         document.getElementById('fear-greed-text').innerHTML = `恐懼與貪婪指數：<span style="font-family:'Urbanist'; font-size:20px; font-weight:800; margin-left:4px; color:${fgColor};">${score}</span> <span style="color:#FFFFFF; background-color:${fgColor}; padding:3px 8px; border-radius:6px; font-size:13.5px; margin-left:6px; font-weight:700; box-shadow: 0 2px 5px ${fgColor}66;">${fgStatus}</span>`;
 
         const targetRatio = getPureNumber(document.getElementById('targetRatio').value)/100;
